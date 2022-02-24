@@ -1,28 +1,20 @@
 import request from 'renderer/utils/request/penguin-stats';
 
-export type StageType = {
-  stageType: string;
+
+type Servers = 'CN' | 'US' | 'JP' | 'KR'
+
+type Locales = 'zh' | 'en' | 'ja' | 'ko'
+
+type StageTypes = 'MAIN' | 'SUB' | 'ACTIVITY' | 'DAILY'
+
+type StageType = {
+  stageType: StageTypes;
   stageId: string;
   zoneId: string;
   code: string;
   apCost: number;
   existence?: {
-    US: {
-      exist: boolean;
-      openTime?: number;
-      closeTime?: number;
-    };
-    CN: {
-      exist: boolean;
-      openTime?: number;
-      closeTime?: number;
-    };
-    JP: {
-      exist: boolean;
-      openTime?: number;
-      closeTime?: number;
-    };
-    KR: {
+    [K in Servers]: {
       exist: boolean;
       openTime?: number;
       closeTime?: number;
@@ -30,10 +22,7 @@ export type StageType = {
   };
   minClearTime: number;
   code_i18n: {
-    ko: string;
-    ja: string;
-    en: string;
-    zh: string;
+    [K in Locales]: string
   };
 };
 
